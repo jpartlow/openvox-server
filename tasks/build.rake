@@ -1,4 +1,5 @@
 require 'fileutils'
+require 'tmpdir'
 
 @image = 'ezbake-builder'
 @container = 'openvox-server-builder'
@@ -47,7 +48,7 @@ namespace :vox do
   task :build, [:tag] do |_, args|
     begin
       abort 'You must provide a tag.' if args[:tag].nil? || args[:tag].empty?
-      run_command("git checkout #{args[:tag]}")
+      run_command("git fetch --tags && git checkout #{args[:tag]}")
       
       # If the Dockerfile has changed since this was last built,
       # delete all containers and do `docker rmi ezbake-builder`
@@ -72,6 +73,7 @@ namespace :vox do
       puts "Building openvox-server"
       run("cd /code && rm -rf ruby && rm -rf output && bundle install --without test && lein install")
       run("cd /code && COW=\"#{@debs}\" MOCK=\"#{@rpms}\" GEM_SOURCE='https://rubygems.org' EZBAKE_ALLOW_UNREPRODUCIBLE_BUILDS=true EZBAKE_NODEPLOY=true LEIN_PROFILES=ezbake lein with-profile user,ezbake,provided,internal ezbake local-build")
+      run_command("sudo chown -R $USER:$USER output")
       Dir.glob('output/*i386*').each { |f| FileUtils.rm_rf(f) }
       Dir.glob('output/puppetserver-*.tar.gz').each { |f| FileUtils.mv(f, f.sub('puppetserver','openvox-server'))}
     ensure
