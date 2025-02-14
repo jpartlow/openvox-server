@@ -11,5 +11,6 @@ RUN /bin/bash --login -c 'rbenv install 3.2.6'
 RUN /bin/bash --login -c 'rbenv global 3.2.6'
 RUN git config --global user.email "openvox@voxpupuli.org"
 RUN git config --global user.name "Vox Pupuli"
+RUN git config --global --add safe.directory /code
 
 CMD ["tail -f /dev/null"]
