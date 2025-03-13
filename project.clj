@@ -105,7 +105,8 @@
                        :repo-target "openvox8"
                        :nonfinal-repo-target "openvox8-nightly"
                        :bootstrap-source :services-d
-                       :logrotate-enabled false}
+                       :logrotate-enabled false
+                       :replaces-pkgs [{:package "puppetserver" :version ""}]}
                 :resources {:dir "tmp/ezbake-resources"}
                 :config-dir "ezbake/config"
                 :system-config-dir "ezbake/system-config"}
