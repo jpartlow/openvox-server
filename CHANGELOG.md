@@ -1,5 +1,7 @@
 ## Unreleased
 
+# 8.8.1
+
 * Add obsoletes/replaces/conflicts metadata with puppetserver on the openvox-server package.
 
 ## 8.8.0
