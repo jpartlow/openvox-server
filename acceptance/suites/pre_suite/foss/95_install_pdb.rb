@@ -10,10 +10,6 @@ teardown do
   on(master, "rm -f #{sitepp}")
 end
 
-step 'Install Puppet nightly repo' do
-  install_puppetlabs_release_repo_on(master, 'puppet8-nightly')
-end
-
 step 'Update EL postgresql repos' do
   # work around for testing on rhel and the repos on the image not finding the pg packages it needs
   if master.platform =~ /el-/
