@@ -104,9 +104,18 @@ jobs:
           - [ubuntu, '24.04']
     steps:
       - uses: actions/checkout@v4
-      - id: vm-cluster
-        uses: jpartlow/nested_vms@v1
+      # XXX Delete me vvv
+      - name: Temporarily test with kvm_automation_tooling@install-openvoxdb-termini
+        uses: actions/checkout@v4
         with:
+          repository: 'jpartlow/kvm_automation_tooling'
+          ref: 'install-openvoxdb-termini'
+          path: 'kvm_automation_tooling'
+      # XXX Delete me ^^^
+      - id: vm-cluster
+        uses: jpartlow/nested_vms@main # XXX Set back to v1
+        with:
+          checkout: false # XXX Delete me
           os: ${{ matrix.os[0] }}
           os-version: ${{ matrix.os[1] }}
           os-arch: ${{ matrix.os[2] || 'x86_64' }}
