@@ -1,17 +1,14 @@
-
-matching_puppetdb_platform = puppetdb_supported_platforms.select { |r| r =~ master.platform }
-skip_test if matching_puppetdb_platform.length == 0 || master.fips_mode?
-
-
 test_name 'PuppetDB setup'
+
+skip_test('Skipped for fips') if master.fips_mode?
+skip_test('No Postgresql packages available for this platform') if unsupported_postgresql_platform?(master)
+
+mark_pdb_integration_expected
+
 sitepp = '/etc/puppetlabs/code/environments/production/manifests/site.pp'
 
 teardown do
   on(master, "rm -f #{sitepp}")
-end
-
-step 'Install Puppet nightly repo' do
-  install_puppetlabs_release_repo_on(master, 'puppet8-nightly')
 end
 
 step 'Update EL postgresql repos' do
@@ -35,16 +32,35 @@ if master.platform.variant == 'debian'
   master.install_package('apt-transport-https')
 end
 
+step 'Ensure PuppetDB certificates are setup' do
+  # Normally the openvoxdb package automagically post-install runs
+  # 'puppetdb ssl-setup', but this relies on the openvox-agent already
+  # having certs generated at the time that the openvoxdb package
+  # was installed. If we installed openvoxdb before running the suite
+  # and before agent certs were generated, then we need this step
+  # to ensure that openvoxdb now gets its certs. (If they are already
+  # in place, the command should be idempotent.)
+  apply_manifest_on(master, <<~EOM)
+    exec { 'puppetdb-prepare-certs':
+      command => '/opt/puppetlabs/bin/puppetdb ssl-setup',
+      path    => '/bin:/sbin:/usr/bin',
+      onlyif  => 'test -f /opt/puppetlabs/bin/puppetdb',
+    }
+  EOM
+end
+
 step 'Configure PuppetDB via site.pp' do
   create_remote_file(master, sitepp, <<SITEPP)
 node default {
   class { 'puppetdb':
+    puppetdb_package    => 'openvoxdb',
     manage_firewall     => false,
     manage_package_repo => true,
     postgres_version    => '14',
   }
 
   class { 'puppetdb::master::config':
+    terminus_package        => 'openvoxdb-termini',
     manage_report_processor => true,
     enable_reports          => true,
   }
