@@ -46,3 +46,23 @@ jobs:
         timeout-minutes: 30
       - name: rspec tests
         run: rake spec
+
+  clojure-linting:
+    name: Clojure Linting
+    runs-on: ubuntu-latest
+    steps:
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: checkout repo
+        uses: actions/checkout@v4
+      # newer versions cause lint errors
+      # https://github.com/clj-kondo/clj-kondo/releases
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          clj-kondo: 2025.02.20
+      - name: kondo lint
+        run: clj-kondo --lint src test
