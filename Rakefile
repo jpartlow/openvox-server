@@ -54,7 +54,7 @@ FACTER_BRANCH = ENV['FACTER_BRANCH'] || 'main'
 TEST_GEMS_DIR = File.join(PROJECT_ROOT, 'vendor', 'test_gems')
 TEST_BUNDLE_DIR = File.join(PROJECT_ROOT, 'vendor', 'test_bundle')
 
-GEM_SOURCE = ENV['GEM_SOURCE'] || "https://artifactory.delivery.puppetlabs.net/artifactory/api/gems/rubygems/"
+GEM_SOURCE = ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 # Jenkins uses `$LEIN` configure the lein version to use
 LEIN_PATH = ENV['LEIN'] || 'lein'
