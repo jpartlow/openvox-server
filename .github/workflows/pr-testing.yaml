@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   clojure-tests:
-    name: PR Testing
+    name: PR Testing Java ${{ matrix.version }}
     strategy:
       fail-fast: false
       matrix:
@@ -46,7 +46,7 @@ jobs:
         timeout-minutes: 30
 
   rspec-tests:
-    name: Rspec Tests
+    name: Rspec Tests Java ${{ matrix.java }} Ruby ${{ matrix.ruby }}
     runs-on: ubuntu-24.04
     strategy:
       fail-fast: false
