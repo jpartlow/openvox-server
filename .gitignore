@@ -12,6 +12,7 @@ log
 .bundle
 .vagrant
 vendor
+/.vendor/
 .nrepl-port
 profiles.clj
 dev/user.clj
