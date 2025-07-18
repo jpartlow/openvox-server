@@ -34,11 +34,10 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
-      # We don't install the system package here because it will install Java 21
-      # The lein script we have in the repo came from
-      # https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
-      - name: install lein
-        run: cp ./lein /usr/local/bin
+      - name: Install clojure tools
+        uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          lein: latest
       - name: setup gems
         run: ./dev-setup
       - name: clojure tests
