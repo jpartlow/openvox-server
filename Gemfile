@@ -31,7 +31,3 @@ group :test do
   # docker-api 1.32.0 requires ruby 2.0.0
   gem 'docker-api', '1.31.0'
 end
-
-if File.exist? "#{__FILE__}.local"
-  eval(File.read("#{__FILE__}.local"), binding)
-end
