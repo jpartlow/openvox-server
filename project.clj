@@ -1,12 +1,5 @@
 (def ps-version "8.8.2-SNAPSHOT")
 
-(defn deploy-info
-  [url]
-  { :url url
-    :username :env/nexus_jenkins_username
-    :password :env/nexus_jenkins_password
-    :sign-releases false})
-
 (def heap-size-from-profile-clj
   (let [profile-clj (io/file (System/getenv "HOME") ".lein" "profiles.clj")]
     (if (.exists profile-clj)
@@ -110,9 +103,6 @@
                 :resources {:dir "tmp/ezbake-resources"}
                 :config-dir "ezbake/config"
                 :system-config-dir "ezbake/system-config"}
-
-  :deploy-repositories [["releases" ~(deploy-info "https://artifactory.delivery.puppetlabs.net/artifactory/clojure-releases__local/")]
-                        ["snapshots" ~(deploy-info "https://artifactory.delivery.puppetlabs.net/artifactory/clojure-snapshots__local/")]]
 
   ;; By declaring a classifier here and a corresponding profile below we'll get an additional jar
   ;; during `lein jar` that has all the code in the test/ directory. Downstream projects can then
