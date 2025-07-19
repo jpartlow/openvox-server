@@ -1,4 +1,4 @@
-(def ps-version "8.8.2-SNAPSHOT")
+(def ps-version "8.9.0")
 
 (def heap-size-from-profile-clj
   (let [profile-clj (io/file (System/getenv "HOME") ".lein" "profiles.clj")]
