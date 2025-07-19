@@ -114,47 +114,6 @@ def re_run_basic_smoke_test
   sh beaker
 end
 
-def jenkins_passing_json_parsed(branch)
-  passing_url = "http://builds.delivery.puppetlabs.net/passing-agent-SHAs/api/v1/json/report-#{branch}"
-  uri = URI.parse(passing_url)
-  begin
-    # DO NOT use uri-open if accepting user input for the uri
-    #   we've done some simple correction here,
-    #   but not enough to cleanse malicious user input
-    jenkins_result = uri.open(redirect: false)
-  rescue OpenURI::HTTPError => e
-    abort "ERROR: Could not get last passing run data for #{branch} of puppet-agent: '#{e.message}'"
-  end
-
-  begin
-    jenkins_result_parsed = JSON.parse(jenkins_result.read)
-  rescue JSON::ParserError => e
-    abort "ERROR: Could not get valid json for last passing run of #{branch}: '#{e.message}'"
-  end
-end
-
-def lookup_passing_puppetagent_sha(my_jenkins_passing_json)
-  begin
-    my_jenkins_passing_json['suite-commit']
-  rescue => e
-    abort "ERROR: Could not get last passing suite-commit value for #{PUPPET_AGENT_BRANCH}\n\n  #{e}"
-  end
-end
-def lookup_passing_puppet_sha(my_jenkins_passing_json)
-  begin
-    my_jenkins_passing_json['puppet']
-  rescue => e
-    abort "ERROR: Could not get puppet's last passing SHA for #{PUPPET_AGENT_BRANCH}\n\n  #{e}"
-  end
-end
-def lookup_passing_facter_sha(my_jenkins_passing_json)
-  begin
-    my_jenkins_passing_json['facter']
-  rescue => e
-    abort "ERROR: Could not get facter's last passing SHA for #{FACTER_BRANCH}\n\n  #{e}"
-  end
-end
-
 def update_submodule(submodule_path, submodule_sha, submodule_name)
   #  ensure we fetch here, or the describe done later could be wrong
   git_checkout_command = "cd #{submodule_path} && git fetch origin && " \
