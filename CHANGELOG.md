@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 **Merged pull requests:**
 
+- openvox-server: depend on openvox-agent 8.21.0 or newer [\#53](https://github.com/OpenVoxProject/openvox-server/pull/53) ([bastelfreak](https://github.com/bastelfreak))
 - \(maint\) Drop debian-10 from testing matrix [\#40](https://github.com/OpenVoxProject/openvox-server/pull/40) ([jpartlow](https://github.com/jpartlow))
 - packaging: Switch from Perforce to OpenVoxProject releases [\#38](https://github.com/OpenVoxProject/openvox-server/pull/38) ([bastelfreak](https://github.com/bastelfreak))
 - Replace puppetserver-ca gem with openvoxserver-ca [\#34](https://github.com/OpenVoxProject/openvox-server/pull/34) ([bastelfreak](https://github.com/bastelfreak))
