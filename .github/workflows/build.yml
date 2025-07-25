@@ -1,3 +1,4 @@
+---
 name: Build openvox-server
 
 on:
@@ -14,6 +15,9 @@ on:
         description: 'A comma-separated list of rpm-based platforms to build for, excluding the architecture (e.g. el-9,amazon-2023). Do not include spaces. If not provided, will use the default list of platforms supported by OpenVox Server and DB.'
         required: false
         type: string
+
+permissions:
+  contents: read
 
 jobs:
   build:
