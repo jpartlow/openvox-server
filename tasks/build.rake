@@ -64,9 +64,9 @@ namespace :vox do
       puts "Checking out ezbake"
       tmp = Dir.mktmpdir("ezbake")
       ezbake_dir = "#{tmp}/ezbake"
-      run_command("git clone https://github.com/openvoxproject/ezbake #{ezbake_dir}", silent: false, print_command: true)
+      ezbake_repo = ENV.fetch('EZBAKE_REPO', 'https://github.com/openvoxproject/ezbake')
       ezbake_branch = ENV['EZBAKE_BRANCH'] || 'main'
-      Dir.chdir(ezbake_dir) { |_| run_command("git checkout #{ezbake_branch}", silent: false, print_command: true) }
+      run_command("git clone -b #{ezbake_branch} #{ezbake_repo} #{ezbake_dir}", silent: false, print_command: true)
 
       puts "Starting container"
       teardown if container_exists
