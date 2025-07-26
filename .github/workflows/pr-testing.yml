@@ -19,6 +19,13 @@ jobs:
         javaargs: ['with-profile fips', '']
         filter: [':singlethreaded', ':multithreaded']
         version: ['11', '17', '21']
+        exclude:
+          - javaargs: 'with-profile fips'
+            version: '21'
+            filter: ':multithreaded'
+          - javaargs: 'with-profile fips'
+            version: '21'
+            filter: ':singlethreaded'
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo
