@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   clojure-tests:
-    name: Clojure Tests - Java ${{ matrix.version }}
+    name: Clojure Tests - Java ${{ matrix.version }} ${{ matrix.filter }} ${{ matrix.javaargs }}
     strategy:
       fail-fast: false
       matrix:
