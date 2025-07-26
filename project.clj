@@ -137,7 +137,7 @@
                                             (throw unsupported-ex))
                                         11 ["-Djava.security.properties==./dev-resources/java.security.jdk11on-fips"]
                                         17 ["-Djava.security.properties==./dev-resources/java.security.jdk11on-fips"]
-                                        (throw unsupported-ex)))}
+                                        (do)))}
              :fips [:defaults :fips-deps]
 
              :testutils {:source-paths ["test/unit" "test/integration"]}
