@@ -168,7 +168,7 @@
                                                [puppetlabs/puppetserver ~ps-version]
                                                [com.puppetlabs/trapperkeeper-webserver-jetty10]
                                                [puppetlabs/trapperkeeper-metrics]]
-                      :plugins [[puppetlabs/lein-ezbake "2.6.3-SNAPSHOT-openvox"]]
+                      :plugins [[puppetlabs/lein-ezbake "3.0.1-SNAPSHOT"]]
                       :name "puppetserver"}
              :uberjar {:dependencies [[org.bouncycastle/bcpkix-jdk18on]
                                       [com.puppetlabs/trapperkeeper-webserver-jetty10]]
