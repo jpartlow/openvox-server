@@ -137,6 +137,7 @@
                                             (throw unsupported-ex))
                                         11 ["-Djava.security.properties==./dev-resources/java.security.jdk11on-fips"]
                                         17 ["-Djava.security.properties==./dev-resources/java.security.jdk11on-fips"]
+                                        21 ["-Djava.security.properties==./dev-resources/java.security.jdk11on-fips"]
                                         (do)))}
              :fips [:defaults :fips-deps]
 
@@ -168,7 +169,7 @@
                                                [puppetlabs/puppetserver ~ps-version]
                                                [com.puppetlabs/trapperkeeper-webserver-jetty10]
                                                [puppetlabs/trapperkeeper-metrics]]
-                      :plugins [[puppetlabs/lein-ezbake "2.6.3-SNAPSHOT-openvox"]]
+                      :plugins [[puppetlabs/lein-ezbake "3.0.1-SNAPSHOT"]]
                       :name "puppetserver"}
              :uberjar {:dependencies [[org.bouncycastle/bcpkix-jdk18on]
                                       [com.puppetlabs/trapperkeeper-webserver-jetty10]]
@@ -249,7 +250,7 @@
                   (str "-Xms" (heap-size "1G"))
                   (str "-Xmx" (heap-size "2G"))
                   "-XX:+IgnoreUnrecognizedVMOptions"]
-                 (if (= 17 (java.lang.Integer/parseInt major))
+                 (if (>= 17 (java.lang.Integer/parseInt major))
                    ["--add-opens" "java.base/sun.nio.ch=ALL-UNNAMED" "--add-opens" "java.base/java.io=ALL-UNNAMED"]
                    [])))
 

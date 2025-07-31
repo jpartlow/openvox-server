@@ -469,7 +469,10 @@
   (is (= :official (master-service/jdk-support-status "11.0")))
   (is (= :official (master-service/jdk-support-status "11.0.7")))
   (is (= :official (master-service/jdk-support-status "17.0")))
-  (is (= :official (master-service/jdk-support-status "17.0.4"))))
+  (is (= :official (master-service/jdk-support-status "17.0.4")))
+  (is (= :official (master-service/jdk-support-status "21")))
+  (is (= :official (master-service/jdk-support-status "21.0")))
+  (is (= :official (master-service/jdk-support-status "21.0.8"))))
 
 (deftest v4-routes-test
   (with-redefs [jruby-core/borrow-from-pool-with-timeout (fn [_ _ _] {:jruby-puppet (Object.)})
