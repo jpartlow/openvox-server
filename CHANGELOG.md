@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [8.10.0](https://github.com/openvoxproject/openvox-server/tree/8.10.0) (2025-07-31)
+
+[Full Changelog](https://github.com/openvoxproject/openvox-server/compare/8.9.0...8.10.0)
+
+**Implemented enhancements:**
+
+- Consider Java 21 "supported" [\#62](https://github.com/OpenVoxProject/openvox-server/pull/62) ([smortex](https://github.com/smortex))
+- Introduce EZBAKE\_REPO to select the ezbake repository & optimize git clone [\#59](https://github.com/OpenVoxProject/openvox-server/pull/59) ([ekohl](https://github.com/ekohl))
+- depend on openvox-agent 8.21.1 or newer [\#58](https://github.com/OpenVoxProject/openvox-server/pull/58) ([bastelfreak](https://github.com/bastelfreak))
+- Run tests on JRE11, 17 & 21 \(21 without FIPS\) [\#57](https://github.com/OpenVoxProject/openvox-server/pull/57) ([bastelfreak](https://github.com/bastelfreak))
+- chore: update rexml to 3.4.1 [\#54](https://github.com/OpenVoxProject/openvox-server/pull/54) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+
+**Security fixes:**
+
+- sec: CVE 2024-49761 update rexml to 3.3.9 [\#42](https://github.com/OpenVoxProject/openvox-server/pull/42) ([SimonHoenscheid](https://github.com/SimonHoenscheid))
+
 ## [8.9.0](https://github.com/openvoxproject/openvox-server/tree/8.9.0) (2025-07-19)
 
 [Full Changelog](https://github.com/openvoxproject/openvox-server/compare/8.8.1...8.9.0)
