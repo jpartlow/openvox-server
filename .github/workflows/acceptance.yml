@@ -85,6 +85,12 @@ on:
           true)
         default: 'https://s3.osuosl.org/openvox-artifacts'
         type: string
+      fork:
+        description: |-
+          The github fork of the project-name Beaker test suite to run.
+        required: true
+        type: string
+        default: openvoxproject
 
 permissions:
   contents: read
@@ -106,6 +112,7 @@ jobs:
       openvoxdb-version: ${{ inputs.openvoxdb-version }}
       openvoxdb-pre-release-build: ${{ inputs.pre-release-build }}
       artifacts-url: ${{ inputs.artifacts-url }}
+      fork: ${{ inputs.fork }}
       acceptance-working-dir: './'
       acceptance-pre-suite: |-
         [
