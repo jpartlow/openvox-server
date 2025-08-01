@@ -75,8 +75,10 @@
   :test-paths ["test/unit" "test/integration"]
   :resource-paths ["resources" "src/ruby"]
 
-  :repositories [["releases" "https://artifactory.delivery.puppetlabs.net/artifactory/clojure-releases__local/"]
-                 ["snapshots" "https://artifactory.delivery.puppetlabs.net/artifactory/clojure-snapshots__local/"]]
+  :deploy-repositories [["clojars" {:url "https://clojars.org/repo"
+                                     :username :env/CLOJARS_USERNAME
+                                     :password :env/CLOJARS_PASSWORD
+                                     :sign-releases false}]]
 
   :plugins [[lein-parent "0.3.7"]
             [jonase/eastwood "1.4.2" :exclusions [org.clojure/clojure]]
